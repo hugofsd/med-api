@@ -6,6 +6,8 @@ import med.voll.api.medico.DadosListagemMedico;
 import med.voll.api.medico.Medico; // Importa a entidade Medico.
 import med.voll.api.medico.MedicoRepository; // Importa o repositório para a entidade Medico.
 import org.springframework.beans.factory.annotation.Autowired; // Anotação para injeção de dependência automática.
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional; // Anotação para demarcar um método ou classe como transacional.
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +26,9 @@ public class MedicoController {
         repository.save(new Medico(dados));
     }
 
+    // por padrão 20 itens por page, caso não tenha parametro na url
     @GetMapping
-    public List<DadosListagemMedico> listar(){
-        return repository.findAll().stream().map(DadosListagemMedico::new).toList();
+    public Page<DadosListagemMedico> listar(Pageable paginacao){
+        return repository.findAll(paginacao).map(DadosListagemMedico::new);
     }
 }
