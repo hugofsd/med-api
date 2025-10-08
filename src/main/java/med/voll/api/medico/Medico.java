@@ -1,6 +1,7 @@
 package med.voll.api.medico;
 
 import jakarta.persistence.*; // Fornece as anotações e interfaces para a persistência de dados (JPA).
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor; // Gera um construtor com todos os campos da classe.
 import lombok.EqualsAndHashCode; // Gera os métodos equals e hashCode.
 import lombok.Getter; // Gera os métodos getters para todos os campos.
@@ -35,6 +36,19 @@ public class Medico {
         this.telefone = dados.telefone();
         this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
+    }
+
+    public void atualizarInformacoes(DadosAtualizacaoMedico dados) {
+        if (dados.nome() != null) {
+            this.nome = dados.nome();
+        }
+        if (dados.telefone() != null) {
+            this.telefone = dados.telefone();
+        }
+        if (dados.endereco() != null) {
+            this.endereco.atualizarInformacoes(dados.endereco());
+        }
+
     }
 }
 ;
