@@ -28,7 +28,8 @@ public class MedicoController {
     // Se não for informado parametros o padrão é 2 registros por pagina ordenando por nome,
     @GetMapping
     public Page<DadosListagemMedico> listar(@PageableDefault(size = 2, sort = {"nome"}) Pageable paginacao){
-        return repository.findAll(paginacao).map(DadosListagemMedico::new);
+       // return repository.findAll(paginacao).map(DadosListagemMedico::new);
+        return repository.findByAtivoTrue(paginacao).map(DadosListagemMedico::new);
     }
 
     @PutMapping
@@ -37,6 +38,15 @@ public class MedicoController {
         var medico = repository.getReferenceById(dados.id());
         medico.atualizarInformacoes(dados);
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id){
+     // repository.deleteById(id); apgaga uma vez do bd
+        var medico = repository.getReferenceById(id);
+        medico.excluir();
+    }
+
 
 
 
