@@ -1,4 +1,4 @@
-package med.voll.api.endereco;
+package med.voll.api.domain.endereco;
 
 import jakarta.persistence.Embeddable; // Especifica que a classe Endereco pode ser incorporada como parte de outra entidade.
 import lombok.AllArgsConstructor; // Gera um construtor com todos os campos da classe.
