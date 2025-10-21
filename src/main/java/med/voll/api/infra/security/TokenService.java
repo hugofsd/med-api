@@ -22,13 +22,13 @@ public class TokenService {
 
     public String gerarToken(Usuario usuario){
         try {
-           var  algoritiomo = Algorithm.HMAC256(secret);
+           var  algoritmo  = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("API Voll.med") // quem está fazendo, sera armazenado no token
                     .withSubject(usuario.getLogin())
                     //.withClaim("id", usuario.getId())//withClaim posso colocar qualquer info dentro do token
                     .withExpiresAt(dataExpiracao()) // expiração dp tpken
-                    .sign(algoritiomo);
+                    .sign(algoritmo );
         } catch (JWTCreationException exception){
           throw new RuntimeException("erro ao gerar token jwt", exception);
         }
