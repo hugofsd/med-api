@@ -1,6 +1,7 @@
 package med.voll.api.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
+import med.voll.api.domain.ValidacaoException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,11 @@ public class TratadorDeErros {
     public ResponseEntity tratarErroDadosDuplicados(DataIntegrityViolationException ex) {
         var mensagem = "Dados já cadastrados no sistema. Verifique o CPF e o e-mail.";
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErroSimples(mensagem));
+    }
+
+    @ExceptionHandler(ValidacaoException.class)
+    public ResponseEntity tratarErroRegraDeNegocio(ValidacaoException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
     // DTO para formatar os erros de validação
