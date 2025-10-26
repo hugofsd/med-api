@@ -1,7 +1,7 @@
 package med.voll.api.domain.consulta;
 
+import med.voll.api.domain.consulta.model.Consulta;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
 

@@ -1,5 +1,6 @@
 package med.voll.api.domain.medico;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*; // Fornece as anotações e interfaces para a persistência de dados (JPA).
 import lombok.AllArgsConstructor; // Gera um construtor com todos os campos da classe.
 import lombok.EqualsAndHashCode; // Gera os métodos equals e hashCode.
@@ -13,6 +14,7 @@ import med.voll.api.domain.endereco.Endereco; // Importa a classe Endereco, que 
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Medico {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

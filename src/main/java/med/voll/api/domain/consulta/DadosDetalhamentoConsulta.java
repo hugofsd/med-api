@@ -1,5 +1,7 @@
 package med.voll.api.domain.consulta;
 
+import med.voll.api.domain.consulta.model.Consulta;
+
 import java.time.LocalDateTime;
 
 public record DadosDetalhamentoConsulta(

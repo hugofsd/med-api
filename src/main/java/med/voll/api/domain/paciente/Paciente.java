@@ -1,5 +1,6 @@
 package med.voll.api.domain.paciente;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -13,6 +14,7 @@ import med.voll.api.domain.endereco.Endereco;
 @AllArgsConstructor
 @Entity(name = "Paciente")
 @Table(name = "pacientes")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Paciente {
 
     @Id
