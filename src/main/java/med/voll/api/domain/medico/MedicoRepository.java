@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository; // Interface do Spring Data JPA para operações de CRUD básicas.
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 
@@ -13,28 +14,31 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
 
     Page<Medico> findByAtivoTrue(Pageable paginacao);
 
-    @Query("""
-            select m from medico m
+    // Usamos nativeQuery = true porque 'rand()' e 'limit' são funções do SQL (MySQL) e não do JPQL.
+    // Também usamos o nome real das tabelas e colunas do banco de dados (ex: medicos, medico_id).
+    @Query(value = """
+            select * from medicos m
             where 
-            m.ativo = 2
+            m.ativo = true
             and 
             m.especialidade = :especialidade
             and
             m.id not in(
-            select c.medico.id from Consulta c
+            select c.medico_id from consultas c
             where
             c.data = :data
             )
             order by rand()
             limit 1
-            """)
-    Medico escolherMedicoAleatorioLivreNaDada(Especialidade especialidade, @NotNull @Future LocalDateTime data);
+            """, nativeQuery = true)
+    Medico escolherMedicoAleatorioLivreNaData(Especialidade especialidade, @NotNull @Future LocalDateTime data);
 
     @Query("""
             select m.ativo
-            from medico m
+            from Medico m
             where
             m.id = :id
             """)
-    Boolean findByAtivoById(Long id);
+    Boolean findByAtivoById(@Param("id") Long id);
+
 }

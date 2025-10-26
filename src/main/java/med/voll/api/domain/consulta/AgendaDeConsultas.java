@@ -25,7 +25,7 @@ public class AgendaDeConsultas {
             throw new ValidationException("Id do paciente informado não existe!");
         }
 
-        if(dados.idPaciente() != null && medicoRepository.existsById(dados.idMedico())){
+        if(dados.idPaciente() != null && !medicoRepository.existsById(dados.idMedico())){
             throw new ValidationException("Id do medico informado não existe!");
         }
 
@@ -44,7 +44,7 @@ public class AgendaDeConsultas {
            throw new ValidationException("Especialidade é obrigatória quando o medico não for escolhido");
        }
 
-       return medicoRepository.escolherMedicoAleatorioLivreNaDada(dados.especialidade(), dados.data());
+       return medicoRepository.escolherMedicoAleatorioLivreNaData(dados.especialidade(), dados.data());
 
     }
 
