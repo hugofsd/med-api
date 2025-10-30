@@ -1,5 +1,6 @@
 package med.voll.api.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid; // Anotação para acionar a validação de um objeto aninhado.
 import med.voll.api.domain.medico.*;
 import org.springframework.beans.factory.annotation.Autowired; // Anotação para injeção de dependência automática.
@@ -13,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("medicos")
+@SecurityRequirement(name = "bearer-key")
 public class MedicoController {
 
     @Autowired
