@@ -8,25 +8,19 @@ import jakarta.validation.constraints.Pattern; // Anotação que valida se o cam
 import med.voll.api.domain.endereco.DadosEndereco; // Importa o DTO para os dados de endereço.
 
 public record DadosCadastroMedico(
-        @NotNull
         @NotBlank
         String nome,
-
         @NotBlank
         @Email
         String email,
 
         @NotBlank
+        String telefone,
+        @NotBlank
         @Pattern(regexp = "\\d{4,6}")
         String crm,
-
         @NotNull
         Especialidade especialidade,
 
-        @NotBlank
-        String telefone,
-
-        @NotNull
-        @Valid
-        DadosEndereco endereco) {
+        @NotNull @Valid DadosEndereco endereco) {
 }
