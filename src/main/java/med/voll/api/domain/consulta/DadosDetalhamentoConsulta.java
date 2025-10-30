@@ -8,7 +8,9 @@ public record DadosDetalhamentoConsulta(
         Long id,
         Long idMedico,
         Long idPaciente,
-        LocalDateTime date) {
+        LocalDateTime date
+
+) {
 
     public DadosDetalhamentoConsulta(Consulta consulta) {
     this(
